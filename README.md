@@ -6,12 +6,12 @@ Team: T03 · Course: Introduction to Optimization · Deadline: 09.10.2026, 23:59
 
 Roles are fixed in the first commit and are not changed without the instructor's approval.
 
-| Role | Member (name as in roster) | GitHub | Code authored | Analysis | Hand trace |
-|------|----------------------------|--------|---------------|----------|-----------|
-| M1 — GD       | <Name Surname> | @<github> | `optim/gd.py`, `problems/rosenbrock.py`, `check_grad` (`problems/base.py`), `experiments/plots.py`* | S1 | H1 |
-| M2 — Newton   | <Name Surname> | @<github> | `optim/newton.py`, `problems/quadratic.py` | S2 | H2 |
-| M3 — Momentum | <Name Surname> | @<github> | `optim/momentum.py`, `problems/project.py` | S3 | H3 |
-| M4 — Adam     | <Name Surname> | @<github> | `optim/adam.py`, `experiments/run_all.py`, tables | S4 | H4 |
+| Role | Member (name as in roster) | GitHub       | Code authored | Analysis | Hand trace |
+|------|----------------------------|--------------|---------------|----------|-----------|
+| M1 — GD       | Amanbay Amir               | @Be3yh4uk129 | `optim/gd.py`, `problems/rosenbrock.py`, `check_grad` (`problems/base.py`), `experiments/plots.py`* | S1 | H1 |
+| M2 — Newton   | <Name Surname>             | @<github>    | `optim/newton.py`, `problems/quadratic.py` | S2 | H2 |
+| M3 — Momentum | <Name Surname>             | @<github>    | `optim/momentum.py`, `problems/project.py` | S3 | H3 |
+| M4 — Adam     | <Name Surname>             | @<github>    | `optim/adam.py`, `experiments/run_all.py`, tables | S4 | H4 |
 
 \* The task does not assign `experiments/plots.py` in a team of four; the team agreed that M1 writes it.
 S5 (project block) and H5 are done jointly by all four members and graded as group work.
@@ -61,10 +61,10 @@ Inside `src/optim/` only numpy and the standard library are allowed.
 
 ## Declarations
 
-- The repository skeleton (folder structure, `src/optim/common.py`, `src/problems/base.py`,
-  stub files and test stubs with the reference iteration counts from the task text) was generated
-  with AI and committed by Amir Amanbay as the `[Infra]` commit.
-  It contains no solver logic.
+-  [Infra] and M1 | Repository skeleton folder structure, `README.md` template, `src/optim/common.py`, `src/problems/base.py` (`Problem`), 
+stubs, test stubs | GD code `src/optim/gd.py`, `src/problems/rosenbrock.py`, `check_grad` / `check_hess` in `src/problems/base.py`, 
+`tests/test_gd.py` | drafted by AI, then read, run against the reference iteration counts and committed by the author 
 
 ## References
+- Lecture 1-5 (Nurseitova A.T.)
 
