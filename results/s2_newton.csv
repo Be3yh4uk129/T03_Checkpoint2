@@ -1,0 +1,5 @@
+problem,variant,iters,converged,f_monotone,lam_min_at_x,lam_max_at_x,second_order_sufficient,grad_norm
+R2,pure,7,yes,no,3.993608e-01,1.001601e+03,yes,0.000e+00
+R2,damped,19,yes,yes,3.993608e-01,1.001601e+03,yes,3.854e-08
+project,pure,3,yes,yes,1.405254e-02,1.956374e-02,yes,2.104e-09
+project,damped,3,yes,yes,1.405254e-02,1.956374e-02,yes,2.104e-09

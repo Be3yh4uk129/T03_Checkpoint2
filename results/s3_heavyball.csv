@@ -1,0 +1,5 @@
+setting,alpha,beta,iters
+tuned_grid,1.000e-02,0.8,117
+polyak_heavy_ball,1.568e-02,0.677231,98
+gd_alpha_star,9.346e-03,-,733
+kappa,106,sqrt_kappa,10.296

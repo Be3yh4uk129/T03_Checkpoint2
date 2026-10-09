@@ -1,0 +1,9 @@
+solver,alpha,Q1_iters,Q2_iters
+adam,1.000e-03,3906,9736
+adam,1.000e-02,452,3147
+adam,1.000e-01,186,480
+adam,1.000e+00,216,222
+gd_alpha_star,9.346e-03,733,733
+gd_bt,-,494,494
+newton_pure,-,1,1
+momentum_1e-3_0.9,1.000e-03,380,380

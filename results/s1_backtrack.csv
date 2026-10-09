@@ -1,0 +1,4 @@
+problem,iters,mean_alpha,mean_halvings,one_over_lam_max_at_x
+R1,13756,2.096386e-03,8.945,9.984032e-04
+Q1,494,1.024798e-02,6.688,4.716981e-03
+project,988,1.000000e+00,0.000,5.111496e+01

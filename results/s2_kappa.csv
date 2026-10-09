@@ -1,0 +1,5 @@
+c,GD_alphastar_iters,alpha_star,Momentum_iters,Momentum_alpha,Momentum_beta,Adam_iters,Adam_alpha,Newton_pure_iters
+10,69,9.090909e-02,41,1.000e-01,0.5,205,1.000e-01,1
+100,691,9.900990e-03,105,1.000e-02,0.8,186,1.000e-01,1
+1000,6908,9.990010e-04,297,1.000e-03,0.9,185,3.162e-02,1
+106,733,9.345794e-03,117,1.000e-02,0.8,186,1.000e-01,1
