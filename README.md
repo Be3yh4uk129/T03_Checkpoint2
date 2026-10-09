@@ -78,27 +78,6 @@ Inside `src/optim/` only numpy and the standard library are allowed.
 - You may review or fix someone else's module, but the commit author is the credited person.
 - Final commit: `git tag checkpoint2 && git push --tags`. Commits after the deadline are ignored.
 
-## Declarations
-
-External code: none. No library optimizer is used anywhere; every solver in `src/optim/` is
-written from scratch with numpy and the standard library only.
-
-AI assistance (Claude) was used as follows. In every case the author read the code, ran it against
-the reference iteration counts of the task description and the check values of the team task file,
-and committed it themselves.
-
-| Part | Files | How AI was used |
-|------|-------|-----------------|
-| [Infra], [GD] | repository skeleton and folder structure, `README.md` template, `src/optim/common.py`, `src/problems/base.py` (`Problem`), module and test stubs, `src/optim/gd.py`, `src/problems/rosenbrock.py`, `check_grad` / `check_hess`, `tests/test_gd.py` | drafted by AI, then read, run against the reference counts and committed by the author |
-| [Newton] | `src/optim/newton.py`, `src/problems/quadratic.py`, `tests/test_newton.py` | drafted by AI, then read, verified against the R1 reference counts (6 and 21) and the Q1/Q2 rotation check, and committed by the author |
-| [Momentum] | `src/optim/momentum.py`, `src/problems/project.py`, `tests/test_momentum.py` | drafted by AI, then read, verified against the R1 reference count (3020) and the task-file check values of the project block, and committed by the author |
-| [Adam] | `src/optim/adam.py`, `src/experiments/run_all.py`, `src/experiments/analysis.py`, `tests/test_adam.py` | drafted by AI, then read, verified against the R1 reference count (1706) and committed by the author |
-| [GD] | `src/experiments/plots.py` | drafted by AI, then read, run and committed by the author |
-| [Report] | `tests/test_project.py` | drafted by AI, checked against the hand-computed H5 values and committed |
-
-The derivations of all gradients and Hessians, the hand traces H1-H5 and the analysis sections
-S1-S5 are the authors' own work.
-
 ## References
 
 - Lectures 1-5, Nurseitova A.T., Introduction to Optimization (ItO2025).
