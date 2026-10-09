@@ -1,0 +1,7 @@
+problem,solver,iterations,alpha,beta,converged,extended_grid
+project,GD,24,31.6227766016838,,True,True
+project,GD-BT,988,,,True,False
+project,Newton (pure),3,,,True,False
+project,Newton (damped),3,,,True,False
+project,Momentum,37,31.6227766016838,0.5,True,True
+project,Adam,225,1.0,,True,True

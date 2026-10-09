@@ -1,0 +1,25 @@
+problem,solver,iterations,alpha,beta,converged,extended_grid
+R1,GD,32076,0.001,,True,False
+R1,GD-BT,13756,,,True,False
+R1,Newton (pure),6,,,True,False
+R1,Newton (damped),21,,,True,False
+R1,Momentum,857,0.0031622776601683794,0.9,True,False
+R1,Adam,1034,0.31622776601683794,,True,False
+R2,GD,31696,0.001,,True,False
+R2,GD-BT,14849,,,True,False
+R2,Newton (pure),7,,,True,False
+R2,Newton (damped),19,,,True,False
+R2,Momentum,594,0.0031622776601683794,0.95,True,False
+R2,Adam,1068,0.1,,True,False
+Q1,GD,733,0.009345794392523364,,True,False
+Q1,GD-BT,494,,,True,False
+Q1,Newton (pure),1,,,True,False
+Q1,Newton (damped),1,,,True,False
+Q1,Momentum,115,0.009345794392523364,0.8,True,False
+Q1,Adam,186,0.1,,True,False
+Q2,GD,733,0.009345794392523364,,True,False
+Q2,GD-BT,494,,,True,False
+Q2,Newton (pure),1,,,True,False
+Q2,Newton (damped),1,,,True,False
+Q2,Momentum,115,0.009345794392523364,0.8,True,False
+Q2,Adam,222,1.0,,True,True
