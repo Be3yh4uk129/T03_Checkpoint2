@@ -40,12 +40,16 @@ def _safe_run(solver, prob, *args, cap, **kwargs):
         return {"ok": False, "iterations": None, "x": None, "hist": None}
 
 
-def _alpha_candidates(prob):
+def _alpha_candidates(prob, method):
+    """Protocol alpha grid for one solver.
+
+    Section 3 adds alpha* = 1/(1+c) as one extra candidate for GD on Q1 and Q2
+    only; momentum and Adam use the eleven grid values alone.
+    """
     values = list(ALPHA_GRID)
-    if prob.name in ("Q1", "Q2"):
-        # Q1/Q2 have Hessian eigenvalues 2 and 2c; c is recovered from the Hessian.
-        c = float(np.asarray(prob.hess(prob.x0))[0, 0])
-        # The rotated Hessian's [0,0] entry is not 2, so infer c from eigenvalues.
+    if method == "GD" and prob.name in ("Q1", "Q2"):
+        # Q1/Q2 have Hessian eigenvalues 2 and 2c, so c = lam_max / lam_min.
+        # (Inferred from the eigenvalues because the rotated Hessian's [0,0] is not 2.)
         eig = np.linalg.eigvalsh(prob.hess(prob.x0))
         c = float(max(eig) / min(eig))
         values.append(alpha_star(c))
@@ -54,7 +58,7 @@ def _alpha_candidates(prob):
 
 def _tune(prob, method, detail_rows):
     """Tune GD, momentum, or Adam, extending alpha grid if best sits at top edge."""
-    alphas = _alpha_candidates(prob)
+    alphas = _alpha_candidates(prob, method)
     while True:
         runs = []
         if method == "GD":
@@ -78,7 +82,7 @@ def _tune(prob, method, detail_rows):
                     runs.append((result["iterations"], a, None, result))
         if not runs:
             return {"solver": method, "iterations": "—", "alpha": "—", "beta": "—",
-                    "converged": False, "extended_grid": len(alphas) > len(_alpha_candidates(prob))}
+                    "converged": False, "extended_grid": len(alphas) > len(_alpha_candidates(prob, method))}
         best = min(runs, key=lambda item: item[0])
         # Extend only when the best is at the upper edge of the original/extended alpha grid.
         if np.isclose(best[1], max(alphas)) and max(alphas) < ALPHA_MAX_EXT:
