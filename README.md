@@ -69,15 +69,6 @@ about 45 seconds and writes the eight `s1`-`s4` CSVs; `plots` writes the three f
 Environment: Python 3.10+, numpy, matplotlib (plots), pytest, sympy (tests only).
 Inside `src/optim/` only numpy and the standard library are allowed.
 
-## Git rules (team agreement)
-
-- `git config user.name` = real name as in the roster (Latin letters); `user.email` = an address
-  added to your GitHub account.
-- Commit message starts with a tag: `[GD]`, `[Newton]`, `[Momentum]`, `[Adam]`, `[Infra]`, `[Report]`.
-- Small commits over several days; no force-push, no squash, no history rewriting after the first push.
-- You may review or fix someone else's module, but the commit author is the credited person.
-- Final commit: `git tag checkpoint2 && git push --tags`. Commits after the deadline are ignored.
-
 ## References
 
 - Lectures 1-5, Nurseitova A.T., Introduction to Optimization (ItO2025).
