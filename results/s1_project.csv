@@ -1,0 +1,10 @@
+setting,alpha,iters,rho_at_x
+lam_min_at_x,1.405254e-02,-,-
+lam_max_at_x,1.956374e-02,-,-
+alpha_opt=2/(lmin+lmax),59.4950,-,-
+gd_bt (alpha0=1),1,988,0.98595
+gd,1,988,0.98595
+gd,10,93,0.85947
+gd,31.62,24,0.55562
+gd,50,12,0.29737
+gd,100,228,0.95637
