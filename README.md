@@ -68,6 +68,11 @@ about 45 seconds and writes the eight `s1`-`s4` CSVs; `plots` writes the three f
 
 Environment: Python 3.10+, numpy, matplotlib (plots), pytest, sympy (tests only).
 Inside `src/optim/` only numpy and the standard library are allowed.
+## Declarations
+
+External code: none. All solvers in `src/optim/` were implemented from scratch using only numpy and Python's standard library.
+
+AI assistance: Claude was used to help with some parts of this checkpoint. However, all code was reviewed, tested, and checked by the author before committing.
 
 ## References
 
