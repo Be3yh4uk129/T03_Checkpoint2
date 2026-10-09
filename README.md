@@ -43,6 +43,8 @@ python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\
 pip install -r requirements.txt
 pytest                                                  # unit tests (R1 reference counts + hand traces)
 PYTHONPATH=src python -m experiments.run_all            # regenerates all tables (CSV) and figures
+PYTHONPATH=src python -m experiments.plots              # figures F1-F3 -> figures/ (reads results/table1.csv, table2.csv)
+PYTHONPATH=src python -m experiments.s1_extra           # extra runs behind S1 -> results/s1_*.csv
 ```
 
 Windows PowerShell: `$env:PYTHONPATH="src"; python -m experiments.run_all`.
@@ -64,6 +66,8 @@ Inside `src/optim/` only numpy and the standard library are allowed.
 -  [Infra] and M1 | Repository skeleton folder structure, `README.md` template, `src/optim/common.py`, `src/problems/base.py` (`Problem`), 
 stubs, test stubs | GD code `src/optim/gd.py`, `src/problems/rosenbrock.py`, `check_grad` / `check_hess` in `src/problems/base.py`, 
 `tests/test_gd.py` | drafted by AI, then read, run against the reference iteration counts and committed by the author 
+-  [GD] M1 | `src/experiments/plots.py` (F1-F3), `src/experiments/s1_extra.py`, draft of S1 (`report/S1_AmirAmanbay.md`) |
+drafted with an AI assistant (Claude), then read, run, and every number checked against `results/*.csv` by the author
 
 ## References
 - Lecture 1-5 (Nurseitova A.T.)
