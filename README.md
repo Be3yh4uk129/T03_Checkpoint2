@@ -89,13 +89,6 @@ AI assistance: Claude was used to help with some parts of this checkpoint. Howev
 
 # Checkpoint 3 section for README.md
 
-Append everything below the line to the existing `README.md`. Do not delete the
-Checkpoint 2 part: both checkpoints have to stay reproducible from this repository.
-
----
-
-# Checkpoint 3 - Constrained Component
-
 Team: T03 · Deadline: 23.10.2026, 23:59 · Tag: `checkpoint3`
 Instance: `cp34_instance(3, 'A', 1)` (storyline A, variant 1, same seed as Checkpoints 1 and 2).
 
