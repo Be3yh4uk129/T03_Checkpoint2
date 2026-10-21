@@ -162,7 +162,7 @@ All seven match the team task file and are asserted in `tests/test_model.py`.
 | number of variables | 1260 |
 | number of constraint rows | 1331 |
 
-Main results: `z_LP = 994.048826` (HiGHS, 0.014 s, 104 simplex iterations; PuLP 3.3.2 with CBC
+Main results: `z_LP = 994.048826` (HiGHS, 0.028 s, 104 simplex iterations; PuLP 3.3.2 with CBC
 gives the same value to a relative difference of 1.3e-11). All five optimality conditions are
 satisfied. The dual price of (A5) is 44.482543 and lies exactly between the two one-sided
 slopes, so the LP is not degenerate at b = 13.
