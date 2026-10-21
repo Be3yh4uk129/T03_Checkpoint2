@@ -1,0 +1,20 @@
+quantity,value,task file,verdict
+N (points),35,35,match
+V (centers),13,13,match
+Cap,105,105,match
+sum of demand,755,755,match
+sum_i sum_k d_ik,59554.52,59554.52,match
+number of variables,1260,1260,match
+number of constraint rows,1331,1331,match
+z_LP (HiGHS),994.048826,,
+z_LP (PuLP 3.3.2 + CBC),994.048826,,
+relative difference of the two solvers,1.29e-11,,
+solver of record,HiGHS (scipy.optimize.linprog),,
+"solve time, s",0.028,,
+simplex iterations,104,,
+"fractional variables, total",10,,
+fractional centers y_k,2,,
+fractional assignments x_ik,8,,
+points served from several centers,4,,
+centers open integrally (y_k = 1),12,,
+python,3.14.0,,

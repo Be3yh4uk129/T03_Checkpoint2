@@ -1,0 +1,8 @@
+condition,what is checked,value,verdict
+(a),"primal feasibility, largest violation",0.000e+00,ok
+(b),"dual feasibility (signs), largest violation",0.000e+00,ok
+(c),"complementary slackness on rows, max |pi_i * slack_i|",0.000e+00,ok
+(d),"reduced costs, largest violation",1.421e-14,ok
+(e),"strong duality, |c^T x - dual objective|",0.000e+00,ok
+,primal objective c^T x,994.048826,
+,"dual objective b^T pi + sum min(0, r_j)",994.048826,
