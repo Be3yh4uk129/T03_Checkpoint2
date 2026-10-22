@@ -89,13 +89,6 @@ AI assistance: Claude was used to help with some parts of this checkpoint. Howev
 
 # Checkpoint 3 section for README.md
 
-Append everything below the line to the existing `README.md`. Do not delete the
-Checkpoint 2 part: both checkpoints have to stay reproducible from this repository.
-
----
-
-# Checkpoint 3 - Constrained Component
-
 Team: T03 · Deadline: 23.10.2026, 23:59 · Tag: `checkpoint3`
 Instance: `cp34_instance(3, 'A', 1)` (storyline A, variant 1, same seed as Checkpoints 1 and 2).
 
@@ -169,7 +162,7 @@ All seven match the team task file and are asserted in `tests/test_model.py`.
 | number of variables | 1260 |
 | number of constraint rows | 1331 |
 
-Main results: `z_LP = 994.048826` (HiGHS, 0.014 s, 104 simplex iterations; PuLP 3.3.2 with CBC
+Main results: `z_LP = 994.048826` (HiGHS, 0.028 s, 104 simplex iterations; PuLP 3.3.2 with CBC
 gives the same value to a relative difference of 1.3e-11). All five optimality conditions are
 satisfied. The dual price of (A5) is 44.482543 and lies exactly between the two one-sided
 slopes, so the LP is not degenerate at b = 13.

@@ -1,0 +1,13 @@
+quantity,value
+designated row,(A5)  sum_k y_k = V
+right-hand side b,13.00
+perturbation step,0.01
+z(b - 0.01),993.604001
+z(b),994.048826
+z(b + 0.01),994.493652
+left slope,44.482543
+dual price pi,44.482543
+right slope,44.482543
+left <= pi <= right,yes
+degenerate at b,no
+right slope - left slope,-1.137e-11
