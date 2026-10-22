@@ -201,7 +201,7 @@ generator `checkpoint3_generator_PUBLIC.py` is kept at the repository root uncha
 the matrix assembly, the checker of the optimality conditions and the perturbation runs are our
 own code.
 
-**AI assistance (Claude).** In every case the author read the code, ran it against the check
+**AI assistance.** In every case the author read the code, ran it against the check
 values of the team task file and the hand numbers of their own hand task, and committed it
 themselves.
 
@@ -211,7 +211,6 @@ themselves.
 | [LP] | `src/lp/solve.py`, `tests/test_lp.py` | drafted by AI, then read, verified by the HiGHS and CBC cross-check and against the H2 hand numbers, and committed by the author |
 | [KKT] | `src/kkt/checker.py`, `src/kkt/convention.py`, `tests/test_kkt.py` | drafted by AI, then read, verified on the two-variable sign-convention LP and against the H3 hand numbers, and committed by the author |
 | [Sens] | `src/sens/perturb.py`, `tests/test_sens.py` | drafted by AI, then read, verified against the H4 hand numbers and the interval check, and committed by the author |
-| [Report] | `src/experiments/run_all_cp3.py`, `tests/test_group.py` | drafted by AI, then read, run and committed; joint work of all four members |
 
 The hand tasks H1 to H5 and the signed analysis sections S1 to S5 are the authors' own work.
 
