@@ -220,4 +220,142 @@ The hand tasks H1 to H5 and the signed analysis sections S1 to S5 are the author
   linear programming, duality, optimality conditions.
 - HiGHS, used through `scipy.optimize.linprog(method="highs")`.
 - PuLP 3.3.2 with the bundled CBC, used as a second solver for `z_LP` only.
+# Checkpoint 4 - Your Own Metaheuristic
+
+Team: T03 · Deadline: 08.11.2026, 23:59 · Tag: `checkpoint4`
+Instance: `cp34_instance(3, 'A', 1)`, the same data as Checkpoints 1 to 3.
+Reference values (task file, reporting only, never read by any solver):
+`z_LP = 994.048826`, `z_ref = 997.603759`.
+
+## Roles and configurations
+
+| Student | Group | Configuration | Role | Code authored | Test | Results file |
+|---|---|---|---|---|---|---|
+| Ikhsanova Aziza | GA pair | GA, penalty | GA-A | `src/meta/ga.py`, `src/meta/random_search.py`, `experiments/exp_diversity_popsize.py`, `experiments/analyse.py` | `tests/test_ga_a.py` | `results/Ikhsanova_runs.csv`, `results/Ikhsanova_exp.csv` |
+| Abdrashit Yersultan | GA pair | GA, penalty | GA-P | `src/meta/ga_problem.py`, `experiments/exp_rho.py` | `tests/test_ga_p.py` | `results/Abdrashit_exp.csv` |
+| Amanbay Amir | SA pair | SA, transfer+swap | SA-I | `src/meta/sa.py` | `tests/test_sa_i.py` | `results/Amanbay_runs.csv` |
+| Kaniyeva Zhamilya | SA pair | SA, transfer+swap | SA-T | `src/meta/nm.py`, `experiments/tuning.py` | `tests/test_sa_t.py` | `results/Kaniyeva_tuning.csv` |
+
+The final runs of the GA pair are in `results/Ikhsanova_runs.csv`, written by GA-A; the
+random-search baseline is in the same file with `configuration = random`. GA-P takes Table 1
+and Figure F1 from that file.
+
+Code is not shared between the two pairs. The only common code is the starter kit and the
+`solve(...)` interface.
+
+## The GA pair: method and design choices
+
+**Representation.** An individual is one integer array `a` of length `N = 35`, where `a[i]`
+is the point index of the center serving point `i`. A point is a center exactly when it
+serves itself, `a[c] == c`, so the centers are the fixed points of the array. An individual
+is structurally valid when it has exactly `V = 13` fixed points and every entry points at
+one of them.
+
+**Penalty (the pair's configuration).**
+
+```
+violation(a) = sum over centers of max(0, load(c) - Cap)      in demand units
+fitness(a)   = cost(a) + rho * violation(a),      rho = 10 by default
+```
+
+The violation is measured in demand units because that is the unit the capacity is written
+in, so one unit of overload is comparable across centers. `rho = 10` is chosen so that
+removing one unit of overload is worth more than any single reassignment can save: the
+largest distance in the instance is about 131 and the smallest demand is 15, so a transfer
+that repairs an overload can save at most about `131 / 15 = 8.7` cost units per unit of
+overload. `experiments/exp_rho.py` runs `rho` in `{1, 10, 100}` and reports what happens.
+Only feasible solutions are ever reported.
+
+**Moves used by the operators.** Besides crossover, mutation applies one or two components:
+
+| move | what it does | counted in question 4 |
+|---|---|---|
+| transfer | a non-center point is reassigned to another center | yes |
+| center move | a center is replaced by a non-center point, and the affected points go to their nearest surviving center | no, it changes the set of centers |
+
+The center move is the additional move required to be listed here. Without it the set of
+centers could only shrink towards the intersection of the initial population's center sets,
+because crossover never introduces a center that neither parent had. Swap is implemented in
+`ga_problem.swap_mutate` but the GA loop does not use it; it exists because question 4 of the
+analysis has to count improving swaps as well as improving transfers.
+
+**Counting of evaluations.** One evaluation is one call of `evaluate` on one candidate.
+Every member of the initial population counts, every offspring counts, and the copy of the
+elite individual costs nothing. The last generation is cut short so that `evals` equals
+`budget` exactly.
+
+**Trace.** `trace` holds `(evaluations, best feasible cost so far)` every 1000 evaluations
+and once more at the end. Before the first feasible individual is found the second entry is
+`inf`; the plotting code drops those points.
+
+## How to reproduce every table and figure
+
+Run from the repository root, with the generator `checkpoint4_generator_PUBLIC.py` in it.
+
+```bash
+pip install -r requirements.txt
+python check_env.py --instance-seed 3 --story A --variant 1      # the five check values
+
+pytest tests/test_ga_a.py tests/test_ga_p.py                     # 32 passed
+
+# the 10 final runs of the GA pair, seeds 0-9, budget 100000       (GA-A)
+PYTHONPATH=. python experiments/run_final.py --module src.meta.ga \
+    --instance-seed 3 --story A --variant 1 --team T03 --role GA-A \
+    --configuration "GA, penalty" --seeds 0-9 --budget 100000 \
+    --out results/Ikhsanova_runs.csv
+
+# the random-search baseline, same seeds and budget                (GA-A)
+PYTHONPATH=. python experiments/run_final.py --module src.meta.random_search \
+    --instance-seed 3 --story A --variant 1 --team T03 --role GA-A \
+    --configuration "random" --seeds 0-9 --budget 100000 \
+    --out results/Ikhsanova_runs.csv --append
+
+# Table 1, Table 2 and Figure F1                                   (GA-A)
+PYTHONPATH=. python experiments/analyse.py
+
+# diversity per generation and the effect of the population size   (GA-A required item)
+PYTHONPATH=. python experiments/exp_diversity_popsize.py
+
+# three values of rho                                              (GA-P required item)
+PYTHONPATH=. python experiments/exp_rho.py
+```
+
+`analyse.py` reruns `solve` on seeds 0 to 9 to recover the traces, which the results file
+does not store, and stops if any recovered cost differs from the cost in the file. Every
+number in `Ikhsanova_CP4.pdf` comes from `results/Ikhsanova_runs.csv`,
+`results/Ikhsanova_analysis.json` and `results/Ikhsanova_exp.csv`.
+
+## Git rules for this checkpoint
+
+- Commit tags: `[SA]`, `[GA]`, `[NM]`, `[Exp]`, `[Report]`.
+- `git config user.name` = your roster name, `user.email` = an address on your GitHub account.
+- Each file of your role is authored by you; small commits; no history rewriting.
+- Final commit: `git tag checkpoint4 && git push --tags`. Commits after the deadline are ignored.
+
+## Declarations
+
+### Ikhsanova Aziza (GA-A)
+
+| Tool or source | Used for | Files or sections | What I checked myself |
+|---|---|---|---|
+|  |  | `src/meta/ga.py`, `src/meta/random_search.py`, `experiments/exp_diversity_popsize.py`, `experiments/analyse.py`, `tests/test_ga_a.py` | ran the whole test file; checked the budget by hand on seven budgets including 1, 7 and 137; confirmed elitism by checking that the best fitness of the population never rises across 3449 generations; reproduced every cost in `Ikhsanova_runs.csv` by rerunning `solve` with the same seeds; compared the reported cost and feasibility against `evaluate_A` of the generator |
+| numpy, matplotlib | arrays and figures | all of the above | versions pinned in `requirements.txt` |
+
+### Abdrashit Yersultan (GA-P)
+
+| Tool or source | Used for | Files or sections | What I checked myself |
+|---|---|---|---|
+| (fill in) | | | |
+
+### Amanbay Amir (SA-I)
+
+| Tool or source | Used for | Files or sections | What I checked myself |
+|---|---|---|---|
+| (fill in) | | | |
+
+### Kaniyeva Zhamilya (SA-T)
+
+| Tool or source | Used for | Files or sections | What I checked myself |
+|---|---|---|---|
+| (fill in) | | | |
 
