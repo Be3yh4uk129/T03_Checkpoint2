@@ -182,20 +182,49 @@ def main():
     fig.savefig(os.path.join(fig_dir, "F1_sa_bestsofar.png"), dpi=150)
     plt.close(fig)
 
+    def pooled_curve(run_dict):
+        nb = len(next(iter(run_dict.values()))["acceptance"])
+        Tm, sh = [], []
+        for i in range(nb):
+            wsum = sum(o["acceptance"][i]["worsening"] for o in run_dict.values())
+            asum = sum(o["acceptance"][i]["accepted"] for o in run_dict.values())
+            Tm.append(next(iter(run_dict.values()))["acceptance"][i]["T_mean"])
+            sh.append(asum / wsum if wsum else np.nan)
+        return Tm, sh
+
+    # contrast: the rule-based temperatures on the tuning seeds 100-104 (never seeds 0-9)
+    rule_set = chosen.get("sets", {}).get("rule")
+    rule_runs = {}
+    if rule_set and chosen["chosen"] != "rule":
+        for s in (100, 101, 102, 103, 104):
+            rule_runs[s] = sa.solve(d, 1, s, int(rows[0]["budget"]), params=rule_set)
+        with open(os.path.join(res_dir, "Amanbay_acceptance_rule.csv"), "w", newline="") as f:
+            w = csv.writer(f)
+            w.writerow(["seed", "bucket", "T_mean", "proposals", "worsening", "accepted", "share"])
+            for s, o in rule_runs.items():
+                for b in o["acceptance"]:
+                    w.writerow([s, b["bucket"], b["T_mean"], b["proposals"], b["worsening"],
+                                b["accepted"], b["share"]])
+        analysis["rule_on_tuning_seeds"] = {
+            str(s): {"cost": o["cost"], "accept_first5": o["accept_first5"],
+                     "accept_last5": o["accept_last5"]} for s, o in rule_runs.items()}
+        with open(os.path.join(res_dir, "Amanbay_analysis.json"), "w") as f:
+            json.dump(analysis, f, indent=2, default=float)
+
     fig, ax = plt.subplots(figsize=(6.4, 3.6))
     for s, o in runs.items():
         T = [b["T_mean"] for b in o["acceptance"] if b["share"] is not None]
         A = [b["share"] for b in o["acceptance"] if b["share"] is not None]
         ax.plot(T, A, color="0.75", lw=0.7)
-    nb = len(next(iter(runs.values()))["acceptance"])
-    Tm = [runs[0]["acceptance"][i]["T_mean"] if 0 in runs else None for i in range(nb)]
-    pooled = []
-    for i in range(nb):
-        wsum = sum(o["acceptance"][i]["worsening"] for o in runs.values())
-        asum = sum(o["acceptance"][i]["accepted"] for o in runs.values())
-        pooled.append(asum / wsum if wsum else np.nan)
-    ax.plot(Tm, pooled, color="C1", lw=1.8, label="all 10 runs pooled")
-    ax.plot([], [], color="0.75", lw=0.7, label="single runs")
+    Tm, pooled = pooled_curve(runs)
+    ax.plot(Tm, pooled, color="C1", lw=1.8,
+            label="final runs, seeds 0-9 (T0=%.2f, Tend=%.2f)" % (params["T0"], params["Tend"]))
+    ax.plot([], [], color="0.75", lw=0.7, label="single final runs")
+    if rule_runs:
+        Tr, pr = pooled_curve(rule_runs)
+        ax.plot(Tr, pr, color="C0", lw=1.4, ls="--",
+                label="rule-based, seeds 100-104 (T0=%.1f, Tend=%.2f)"
+                % (rule_set["T0"], rule_set["Tend"]))
     ax.set_xscale("log")
     ax.invert_xaxis()
     ax.set_xlabel("temperature T (log scale, cooling runs left to right)")
