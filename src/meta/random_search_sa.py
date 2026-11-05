@@ -8,7 +8,6 @@ The reported cost and feasibility come from the checker evaluate_A.
 Same interface as solve of sa.py: solve(d, variant, seed, budget, params=None, start=None).
 """
 import importlib.util
-import inspect
 import math
 import os
 import random
@@ -30,27 +29,12 @@ def _generator():
 
 
 def _check(d, solution):
-    """evaluate_A on (centers, assign, vehicle) -> (cost, feasible). Adapt here if needed."""
-    ev = _generator().evaluate_A
+    """evaluate_A(d, variant, centers, assign, vehicle) -> (objective, problems).
+    Returns (cost, feasible)."""
     centers, assign, vehicle = solution
-    n_args = len(inspect.signature(ev).parameters)
-    # The public Checkpoint 4 generator API is evaluate_A(d, variant, centers, assign, vehicle).
-    # This solver is restricted to Storyline A, variant 1, just like sa.py.
-    if n_args >= 5:
-        out = ev(d, 1, centers, assign, vehicle)
-    elif n_args == 4:
-        out = ev(d, 1, centers, assign)
-    elif n_args == 3:
-        out = ev(d, centers, assign)
-    else:
-        out = ev(d, (centers, assign, vehicle))
-    if isinstance(out, dict):
-        problems = out.get("problems", out.get("violations", []))
-        feasible = bool(out["feasible"]) if "feasible" in out else not problems
-        return float(out["cost"]), feasible and not problems
-    if len(out) == 2:
-        return float(out[0]), not out[1]
-    return float(out[0]), bool(out[1]) and not out[2]
+    cost, problems = _generator().evaluate_A(d, int(d.get("variant", 1)), list(centers),
+                                             list(assign), vehicle)
+    return float(cost), len(problems) == 0
 
 
 def solve(d, variant, seed, budget, params=None, start=None):
