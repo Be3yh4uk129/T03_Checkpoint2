@@ -1,0 +1,29 @@
+{
+ "1.0": {
+  "mean_cost": 1005.3802506335654,
+  "best_cost": 997.9106182973521,
+  "worst_cost": 1016.7627082947995,
+  "mean_feasible_offspring": 0.2892607782334701,
+  "runs_infeasible": 0,
+  "runs": 5,
+  "seconds": 86.00919966697693
+ },
+ "10.0": {
+  "mean_cost": 1015.830146027796,
+  "best_cost": 1008.7478143501976,
+  "worst_cost": 1024.6115360639672,
+  "mean_feasible_offspring": 0.452407722316695,
+  "runs_infeasible": 0,
+  "runs": 5,
+  "seconds": 97.33717036247253
+ },
+ "100.0": {
+  "mean_cost": 1019.0376870677497,
+  "best_cost": 1013.008698393357,
+  "worst_cost": 1024.6233144605674,
+  "mean_feasible_offspring": 0.4397519255776733,
+  "runs_infeasible": 0,
+  "runs": 5,
+  "seconds": 92.89100732803345
+ }
+}
