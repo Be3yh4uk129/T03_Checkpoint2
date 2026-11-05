@@ -325,6 +325,50 @@ does not store, and stops if any recovered cost differs from the cost in the fil
 number in `Ikhsanova_CP4.pdf` comes from `results/Ikhsanova_runs.csv`,
 `results/Ikhsanova_analysis.json` and `results/Ikhsanova_exp.csv`.
 
+## The SA pair (Amir Amanbay SA-I, Zhamilya Kaniyeva SA-T)
+
+Configuration: **SA, transfer and swap**. Instance `cp34_instance(3, 'A', 1)`.
+
+Agreed interface: `solve(d, variant, seed, budget, params={"T0": ..., "Tend": ...}, start=None)`.
+
+**Moves and shares.** transfer 60 %, swap 30 %, and one **additional move, recenter** 10 %: a
+non-center point j takes over the role of its own center k, the whole cluster of k is served
+by j afterwards (loads unchanged). It is the only move that changes the set of centers.
+
+**Constraint handling.** Only feasible moves are proposed: a draw that would push a load above
+Cap = 105 is redrawn from the data (loads, demands) before its cost is computed, so it is not
+an evaluation. Every proposal whose cost is computed is one evaluation, accepted or not; the
+starting solution is one evaluation. Start: 13 random centers, every other point (random
+order) to the nearest center with room.
+
+**Incremental cost.** transfer: one distance difference; swap: two; recenter: the distance
+changes over the cluster plus 2 (D_j - D_k). Checked against `evaluate_A` on 1000 random
+moves in `tests/test_sa_i.py`.
+
+**Temperatures.** Rule of Section 4 in `sa.rule_params` (walk of 3000 proposals, tuning seed
+100). Nelder-Mead tuning in `experiments/tuning.py` with full inner budget 100000 (no reduction),
+at most 80 objective calls. The set with the lower mean on seeds 100-104 is used for 0-9.
+
+**Baseline.** `src/meta/random_search_sa.py`: independent draws (13 random centers, every
+other point to a uniformly random center), best feasible kept, budget 100000, seeds 0-9;
+rows with `configuration = random` in `results/Kaniyeva_tuning.csv`.
+
+### Commands (in this order)
+
+```bash
+pytest tests/test_sa_i.py tests/test_sa_t.py
+PYTHONPATH=. python experiments/tuning.py           # Zhamilya, about 2 minutes
+PYTHONPATH=. python experiments/sa_params.py        # Amir: rule vs tuned on seeds 100-104
+PYTHONPATH=. python experiments/run_final.py --module src.meta.sa \
+    --instance-seed 3 --story A --variant 1 --team T03 --role SA-I \
+    --configuration "SA, transfer+swap" --seeds 0-9 --budget 100000 \
+    --params '<the line printed by sa_params.py>' --out results/Amanbay_runs.csv
+PYTHONPATH=. python experiments/sa_analysis.py      # Table 1, Table 2, F1, acceptance curve
+```
+
+Table 1 and Figure F1 of both partners: `results/Amanbay_runs.csv` -> `results/Amanbay_table1.csv`,
+`figures/F1_sa_bestsofar.png`. Baseline: `results/Kaniyeva_tuning.csv` (configuration `random`).
+
 ## Git rules for this checkpoint
 
 - Commit tags: `[SA]`, `[GA]`, `[NM]`, `[Exp]`, `[Report]`.
@@ -350,8 +394,7 @@ number in `Ikhsanova_CP4.pdf` comes from `results/Ikhsanova_runs.csv`,
 ### Amanbay Amir (SA-I)
 
 | Tool or source | Used for | Files or sections | What I checked myself |
-|---|---|---|---|
-| (fill in) | | | |
+| Amir Amanbay | AI | drafting the SA, the moves, the incremental cost, the test and the analysis scripts | `src/meta/sa.py`, `tests/test_sa_i.py`, `experiments/sa_params.py`, `experiments/sa_analysis.py` | read the code; made a predict; run the tests; reran `experiments/sa_analysis.py`, which reruns every seed and asserts the same cost as in `results/Amanbay_runs.csv`; checked that the CSV has 10 rows with evals = 100000;|
 
 ### Kaniyeva Zhamilya (SA-T)
 
