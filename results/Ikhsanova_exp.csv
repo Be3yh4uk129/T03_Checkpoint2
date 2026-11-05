@@ -1,0 +1,11 @@
+team,role,configuration,seed,budget,cost,evals,feasible,seconds,params
+T03,GA-A,"GA, penalty, N=30",100,100000,1000.574760731,100000,True,25.32,"{""pop_size"": 30, ""rho"": 1.0}"
+T03,GA-A,"GA, penalty, N=30",101,100000,1007.223431076,100000,True,24.72,"{""pop_size"": 30, ""rho"": 1.0}"
+T03,GA-A,"GA, penalty, N=30",102,100000,997.910618297,100000,True,24.82,"{""pop_size"": 30, ""rho"": 1.0}"
+T03,GA-A,"GA, penalty, N=30",103,100000,1016.762708295,100000,True,24.66,"{""pop_size"": 30, ""rho"": 1.0}"
+T03,GA-A,"GA, penalty, N=30",104,100000,1004.429734768,100000,True,24.76,"{""pop_size"": 30, ""rho"": 1.0}"
+T03,GA-A,"GA, penalty, N=60",100,100000,1022.993188853,100000,True,25.22,"{""pop_size"": 60, ""rho"": 1.0}"
+T03,GA-A,"GA, penalty, N=60",101,100000,1019.242277382,100000,True,25.47,"{""pop_size"": 60, ""rho"": 1.0}"
+T03,GA-A,"GA, penalty, N=60",102,100000,1015.908408839,100000,True,25.44,"{""pop_size"": 60, ""rho"": 1.0}"
+T03,GA-A,"GA, penalty, N=60",103,100000,1013.785416468,100000,True,25.54,"{""pop_size"": 60, ""rho"": 1.0}"
+T03,GA-A,"GA, penalty, N=60",104,100000,1017.159054844,100000,True,26.56,"{""pop_size"": 60, ""rho"": 1.0}"
