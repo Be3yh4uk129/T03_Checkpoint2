@@ -389,7 +389,8 @@ Table 1 and Figure F1 of both partners: `results/Amanbay_runs.csv` -> `results/A
 
 | Tool or source | Used for | Files or sections | What I checked myself |
 |---|---|---|---|
-| (fill in) | | | |
+| numpy, matplotlib | arrays, figure F3, data analysis | src/meta/ga_problem.py, tests/test_ga_p.py, experiments/exp_rho.py, results/Abdrashit_exp.csv | ran the GA_P tests (all 14 passed), ran exp_rho.py and confirmed the output matches results/Abdrashit_exp.csv, checked the 10 columns and evals = 100000 |
+| AI assistant | draft of the code, help with the report text | src/meta/ga_problem.py, tests/test_ga_p.py, experiments/exp_rho.py, Abdrashit_CP4.pdf | read and understood the code, chose rho = 1 from my own runs on seeds 100-104, checked every number in the report against the CSV files |
 
 ### Amanbay Amir (SA-I)
 
