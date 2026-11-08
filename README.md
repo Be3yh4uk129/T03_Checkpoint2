@@ -402,4 +402,5 @@ Table 1 and Figure F1 of both partners: `results/Amanbay_runs.csv` -> `results/A
 | Tool or source | Used for | Files or sections | What I checked myself |
 |---|---|---|---|
 | numpy, matplotlib | figures, data analysis, numerical tasks | src/meta/nm.py, src/meta/random_search_sa.py, tests/test_sa_t.py, experiments/tuning.py, results/Kaniyeva_tuning.csv | ran the SA_T tests (all 4 of them passed), executed tuning experiment and confirmed the output, handled Nelder-Mead parameter updates, objective evaluation, stopping conditions, tuning the results |
+| AI assistant | code draft and debugging, report redaction | src/meta/nm.py, src/meta/random_search_sa.py, tests/test_sa_t.py, experiments/tuning.py, Kaniyeva_CP4.pdf | SA-T implementation, tuning experiment, analysis, code and results validatoion and verification|
 
