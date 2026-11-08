@@ -382,7 +382,7 @@ Table 1 and Figure F1 of both partners: `results/Amanbay_runs.csv` -> `results/A
 
 | Tool or source | Used for | Files or sections | What I checked myself |
 |---|---|---|---|
-|  |  | `src/meta/ga.py`, `src/meta/random_search.py`, `experiments/exp_diversity_popsize.py`, `experiments/analyse.py`, `tests/test_ga_a.py` | ran the whole test file; checked the budget by hand on seven budgets including 1, 7 and 137; confirmed elitism by checking that the best fitness of the population never rises across 3449 generations; reproduced every cost in `Ikhsanova_runs.csv` by rerunning `solve` with the same seeds; compared the reported cost and feasibility against `evaluate_A` of the generator |
+| AI assistant | drafting the GA loop, the random-search baseline, the shared files | `src/meta/ga.py`, `src/meta/random_search.py`, `experiments/exp_diversity_popsize.py`, `experiments/analyse.py`, `tests/test_ga_a.py` | ran the whole test file; checked the budget by hand on seven budgets including 1, 7 and 137; confirmed elitism by checking that the best fitness of the population never rises across 3449 generations; reproduced every cost in `Ikhsanova_runs.csv` by rerunning `solve` with the same seeds; compared the reported cost and feasibility against `evaluate_A` of the generator |
 | numpy, matplotlib | arrays and figures | all of the above | versions pinned in `requirements.txt` |
 
 ### Abdrashit Yersultan (GA-P)
