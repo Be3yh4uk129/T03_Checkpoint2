@@ -395,7 +395,8 @@ Table 1 and Figure F1 of both partners: `results/Amanbay_runs.csv` -> `results/A
 ### Amanbay Amir (SA-I)
 
 | Tool or source | Used for | Files or sections | What I checked myself |
-| Amir Amanbay | AI | drafting the SA, the moves, the incremental cost, the test and the analysis scripts | `src/meta/sa.py`, `tests/test_sa_i.py`, `experiments/sa_params.py`, `experiments/sa_analysis.py` | read the code; made a predict; run the tests; reran `experiments/sa_analysis.py`, which reruns every seed and asserts the same cost as in `results/Amanbay_runs.csv`; checked that the CSV has 10 rows with evals = 100000;|
+|---|---|---|---|
+| AI | drafting the SA, the moves, the incremental cost, the test and the analysis scripts | `src/meta/sa.py`, `tests/test_sa_i.py`, `experiments/sa_params.py`, `experiments/sa_analysis.py` | read the code; made a predict; run the tests; reran `experiments/sa_analysis.py`, which reruns every seed and asserts the same cost as in `results/Amanbay_runs.csv`; checked that the CSV has 10 rows with evals = 100000;|
 
 ### Kaniyeva Zhamilya (SA-T)
 
