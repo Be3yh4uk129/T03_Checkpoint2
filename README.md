@@ -466,7 +466,8 @@ the last run of each size, F2 shows all of them. Times change from run to run; v
 
 | Tool or source | Used for | Files or sections | What I checked myself |
 |---|---|---|---|
-|  |  |  |  |
+| numpy, scipy, matplotlib | arrays, the Checkpoint 1 objective, evaluation of the solutions | `final/src/block1.py`, `final/src/rerun_cp4.py` | versions pinned in `requirements.txt` |
+| AI assistant | drafting `rerun_cp4.py`, `block1.py`; drafted by AI, then read, checked and committed by the author | `final/src/rerun_cp4.py`, `final/src/block1.py`, `results/final_cp4_reruns.json`, `results/final_block1_solutions.csv`, `results/final_block1_summary.json`, Block 1 of the report | read and understood the code; `rerun_cp4.py` asserts that all 20 reruns reproduce the costs of `Ikhsanova_runs.csv` and `Amanbay_runs.csv`; reran `block1.py` and got the same results files; recomputed with a separate script the Checkpoint 1 objective of the optimum (57310.53), of SA seed 5 (57310.53, the same 13 clusters, centers 15, 24 instead of 6, 7) and of SA seed 3 (50369.57): the values agree; checked that every Block 1 number in the report agrees with `final_block1_summary.json` |
 
 ### Amanbay Amir (Block 3)
 
