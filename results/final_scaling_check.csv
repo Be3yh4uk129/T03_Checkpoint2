@@ -1,0 +1,11 @@
+team,configuration,story,variant,size,seed,budget,cost,evals,feasible,seconds,start,params
+T03,"GA rho=10, own start (check)",A,1,100,0,100000,2805.548983771,100000,True,20.88,own,"{""rho"": 10}"
+T03,"GA rho=10, own start (check)",A,1,100,1,100000,2811.498442718,100000,True,20.67,own,"{""rho"": 10}"
+T03,"GA rho=10, own start (check)",A,1,100,2,100000,2778.415608937,100000,True,21.84,own,"{""rho"": 10}"
+T03,"GA rho=10, own start (check)",A,1,100,3,100000,2723.632762463,100000,True,22.59,own,"{""rho"": 10}"
+T03,"GA rho=10, own start (check)",A,1,100,4,100000,2856.201463274,100000,True,21.98,own,"{""rho"": 10}"
+T03,"GA rho=10, own start (check)",A,1,100,5,100000,2749.295621799,100000,True,21.60,own,"{""rho"": 10}"
+T03,"GA rho=10, own start (check)",A,1,100,6,100000,2826.645739807,100000,True,21.22,own,"{""rho"": 10}"
+T03,"GA rho=10, own start (check)",A,1,100,7,100000,2727.807517475,100000,True,21.00,own,"{""rho"": 10}"
+T03,"GA rho=10, own start (check)",A,1,100,8,100000,2826.609331978,100000,True,20.19,own,"{""rho"": 10}"
+T03,"GA rho=10, own start (check)",A,1,100,9,100000,2882.517494196,100000,True,21.59,own,"{""rho"": 10}"

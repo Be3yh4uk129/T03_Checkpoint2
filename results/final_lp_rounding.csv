@@ -1,0 +1,4 @@
+N,z_LP,lp_seconds,n_fractional_y,rounded_cost,rounded_feasible,start_file
+60,1488.234958,0.05,17,1589.972571,True,results/final_rounded_A_60.json
+100,2347.427041,0.20,25,2670.485350,True,results/final_rounded_A_100.json
+150,3448.463781,0.45,31,3856.695711,True,results/final_rounded_A_150.json

@@ -1,0 +1,2 @@
+N,configuration,feasible,runs,mean,best,worst,std,gap_best_known_mean
+100,"GA rho=10, own start (check)",10,10,2798.8173,2723.6328,2882.5175,53.3493,15.8948
