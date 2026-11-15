@@ -1,0 +1,76 @@
+{
+  "optimum": {
+    "ref": 997.6037586433932,
+    "cp1": 57310.53163759369
+  },
+  "approx_runs_equal_to_optimum": [
+    "GA, penalty seed 7"
+  ],
+  "best_other_approx": {
+    "label": "SA, transfer+swap seed 5",
+    "ref": 998.7541627189187,
+    "cp1": 57310.53163759369
+  },
+  "lowest_cp1_among_reference_solutions": {
+    "label": "SA, transfer+swap seed 3",
+    "ref": 999.9153487147405,
+    "cp1": 50369.57269886315
+  },
+  "spearman_rank_ref_vs_cp1_21_solutions": 0.38051948051948054,
+  "own_model": {
+    "cp1": 38784.98737310688,
+    "ref": 1120.112007147487,
+    "feasible": true,
+    "n_starts": 221,
+    "gap_ref_percent": 12.280251296435422
+  },
+  "same_clusters_optimum_and_sa5": true,
+  "centers_only_in_optimum_vs_sa5": [
+    [
+      6,
+      7
+    ],
+    [
+      15,
+      24
+    ]
+  ],
+  "parts_optimum": {
+    "assignment": 283.33162207114594,
+    "warehouse_trips": 714.2721365722473
+  },
+  "parts_own_model": {
+    "assignment": 244.31001423288598,
+    "warehouse_trips": 875.8019929146011
+  },
+  "own_model_cluster_loads": [
+    17,
+    18,
+    27,
+    43,
+    43,
+    44,
+    51,
+    73,
+    80,
+    84,
+    90,
+    91,
+    94
+  ],
+  "optimum_cluster_loads": [
+    18,
+    20,
+    23,
+    29,
+    29,
+    43,
+    55,
+    70,
+    80,
+    91,
+    94,
+    98,
+    105
+  ]
+}
