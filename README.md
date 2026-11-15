@@ -1,4 +1,4 @@
-# Checkpoint 2 — Unconstrained Component: optimizers from scratch
+# Checkpoint 2 - Unconstrained Component: optimizers from scratch
 
 Team: T03 · Course: Introduction to Optimization · Deadline: 09.10.2026, 23:59 · Tag: `checkpoint2`
 
@@ -404,4 +404,77 @@ Table 1 and Figure F1 of both partners: `results/Amanbay_runs.csv` -> `results/A
 |---|---|---|---|
 | numpy, matplotlib | figures, data analysis, numerical tasks | src/meta/nm.py, src/meta/random_search_sa.py, tests/test_sa_t.py, experiments/tuning.py, results/Kaniyeva_tuning.csv | ran the SA_T tests (all 4 of them passed), executed tuning experiment and confirmed the output, handled Nelder-Mead parameter updates, objective evaluation, stopping conditions, tuning the results |
 | AI assistant | code draft and debugging, report redaction | src/meta/nm.py, src/meta/random_search_sa.py, tests/test_sa_t.py, experiments/tuning.py, Kaniyeva_CP4.pdf | SA-T implementation, tuning experiment, analysis, code and results validation and verification|
+
+# Final
+
+Team: T03 · Deadline: 15.11.2026, 23:59 · Tag: `final` · Report: `T03_Final.pdf` (Moodle)
+Instance: `cp34_instance(3, 'A', 1)` (Blocks 1 and 2) and `scaled_instance('A', N, 1)` for N = 60, 100, 150 (Block 3).
+The files of `final_kit.zip` replace the old `checkpoint4_generator_PUBLIC.py` and `check_env.py` and add
+`experiments/run_scaling.py` and `experiments/exact_helper.py`.
+
+## Layout added for the Final
+
+    final/src/common.py            paths, instance calls, the CP3 model as scipy.optimize.milp input
+    final/src/exact_scaled.py      exact method: CP3 model + HiGHS (scipy.optimize.milp), limit 120 s
+    final/src/lp_round.py          LP relaxation and the rounding rule, writes the start files
+    final/src/rerun_cp4.py         reruns the 20 final runs of Checkpoint 4 to keep solutions and traces
+    final/src/block1.py            Block 1: reference solutions under our Checkpoint 1 objective
+    final/src/block2.py            Block 2: Table 2 and Figure F1
+    final/src/block3.py            Block 3: Table 3 and Figure F2
+    final/run_block3_methods.sh    Block 3: GA and SA on N = 60, 100, 150, own start and LP-rounded start
+    final/run_block3_extra.sh      Block 3: second exact run and the rho = 10 check
+
+Parameters of Block 3 are the ones of Checkpoint 4: budget 100000, seeds 0-9; GA with rho = 1 and the defaults
+of `src/meta/ga.py`; SA with the tuned T0 = 6.892341137379357, Tend = 3.0081420522057414
+(`results/Amanbay_chosen_params.json`). The only code change in a Checkpoint 4 file is in `src/meta/ga.py`:
+`start` may now come as the interface triple `(centers, assign, vehicle)` of `run_scaling.py`.
+
+## How to reproduce every table and figure
+
+Run from the repository root (on Windows use Git Bash for the two `.sh` files, or run their lines one by one).
+
+```
+python check_env.py --scaled 100 --story A --variant 1     # N 100 V 29 Sum demand 2218 Cap 102
+
+# Block 3 first (it takes the longest)
+python final/src/exact_scaled.py                           # exact: own instance and N = 60, 100, 150 -> results/final_exact.csv
+python final/src/lp_round.py                               # rounded LP starts -> results/final_rounded_A_<N>.json
+bash final/run_block3_methods.sh                           # GA and SA, 120 runs -> results/final_scaling_runs.csv (about 25 min)
+bash final/run_block3_extra.sh                             # second exact run, GA rho = 10 check -> results/final_scaling_check.csv
+python final/src/block3.py                                 # Table 3 and F2 -> results/final_table3.csv, figures/final_F2_exact_time.png
+
+# Blocks 1 and 2
+python final/src/rerun_cp4.py                              # solutions and traces -> results/final_cp4_reruns.json (about 5 min)
+python final/src/block1.py                                 # Block 1 -> results/final_block1_solutions.csv, final_block1_summary.json
+python final/src/block2.py                                 # Table 2 and F1 -> results/final_table2.csv, figures/final_F1_methods.png
+```
+
+`exact_scaled.py` appends to `results/final_exact.csv`, so every run of the solver stays in the file; Table 3 uses
+the last run of each size, F2 shows all of them. Times change from run to run; values and gaps are compared.
+
+## Declarations (Final)
+
+### Ikhsanova Aziza (Block 4, shared files)
+
+| Tool or source | Used for | Files or sections | What I checked myself |
+|---|---|---|---|
+|  |  |  |  |
+
+### Abdrashit Yersultan (Block 1)
+
+| Tool or source | Used for | Files or sections | What I checked myself |
+|---|---|---|---|
+|  |  |  |  |
+
+### Amanbay Amir (Block 3)
+
+| Tool or source | Used for | Files or sections | What I checked myself |
+|---|---|---|---|
+|  |  |  |  |
+
+### Kaniyeva Zhamilya (Block 2)
+
+| Tool or source | Used for | Files or sections | What I checked myself |
+|---|---|---|---|
+|  |  |  |  |
 
