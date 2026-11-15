@@ -66,6 +66,11 @@ def solve(d, variant, seed, budget, params=None, start=None):
 
     rng = np.random.default_rng(seed)
 
+    # `start` may come as the interface triple (centers, assign, vehicle) of run_scaling.py;
+    # our individual is the assign array itself, because a center serves itself
+    if start is not None and isinstance(start, (tuple, list)) and len(start) == 3:
+        start = start[1]
+
     evals = 0
     trace = []
     next_trace = 0

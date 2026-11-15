@@ -1,4 +1,6 @@
-"""Run once: python check_env.py --instance-seed 5 --story A --variant 1  (add --cap 108 for T11).
+"""Final: python check_env.py --scaled 100 --story A --variant 2   prints the check values of the scaled instance of Block 3
+Checkpoint 4 usage:
+Run once: python check_env.py --instance-seed 5 --story A --variant 1  (add --cap 108 for T11).
 Compare the printed values with the check values of your task file."""
 import argparse, sys
 print('Python', sys.version.split()[0])
@@ -13,9 +15,20 @@ try:
 except Exception as e:
     print('Put checkpoint4_generator_PUBLIC.py next to this file:', e); sys.exit(1)
 ap = argparse.ArgumentParser()
-ap.add_argument('--instance-seed', type=int, required=True); ap.add_argument('--story', required=True)
+ap.add_argument('--story', required=True)
 ap.add_argument('--variant', type=int, required=True); ap.add_argument('--cap', type=int, default=None)
+ap.add_argument('--scaled', type=int, default=None)
+ap.add_argument('--instance-seed', type=int, default=None)
 a = ap.parse_args()
+if not a.scaled and a.instance_seed is None:
+    ap.error('--instance-seed is required (or use --scaled)')
+if a.scaled:
+    d = gen.scaled_instance(a.story, a.scaled, a.variant)
+    if a.story == 'A':
+        print('N', d['N'], 'V', d['V'], 'Sum demand', int(sum(d['demand'])), 'Cap', d.get('Cap'))
+    else:
+        print('S', d['S'], 'M', d['M'], 'cpu_cap', int(sum(d['cpu_cap'])), 'cpu_req', int(sum(d['cpu_req'])))
+    print('Environment OK' if ok else 'Install the missing packages'); sys.exit(0)
 d = gen.cp34_instance(a.instance_seed, a.story, a.variant, cap=a.cap)
 if a.story == 'A':
     print('N', d['N'], 'V', d['V'], 'Sum demand', int(sum(d['demand'])), 'Cap', d.get('Cap'))

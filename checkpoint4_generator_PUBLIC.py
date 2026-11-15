@@ -1,4 +1,7 @@
-"""Checkpoint 4 -- public instance generator and solution checkers (includes the Checkpoint 3 data; Introduction to Optimization, ItO2025).
+"""Checkpoint 4 / Final -- public instance generator and solution checkers (includes the Checkpoint 3 data; Introduction to Optimization).
+
+FINAL VERSION: identical to the Checkpoint 4 file except that scaled_instance(story, size, variant) now works for all
+three variants (used in Block 3 of the Final). Nothing else changed.
 
 Uses the SAME team seed as Checkpoints 1 and 2. Your team's call (story, variant and, if any, an
 extra argument) is written in your team's task file. Example:
@@ -80,6 +83,52 @@ def cp34_instance(seed, story, variant, cap=None):
             raise ValueError("argument cap is defined for storyline A only")
     else:
         raise ValueError("story must be 'A' or 'B'")
+    d['story'], d['variant'] = story, variant
+    return d
+
+
+def scaled_instance(story, size, variant=1):
+    """Larger instance for the scaling experiment of the Final (fixed seeds, the same structure as your variant).
+    story 'A': size = N points, V = round(N/3.5) centers; Cap (variants 1, 2) or the vehicle capacities (variant 3)
+               are chosen for about 75% fill.
+    story 'B': size = M virtual machines, S = round(M/3.5) servers.
+    The geometry (points, demands, warehouse) or the servers and requests do not depend on the variant; the extra data of
+    variants 2 and 3 are drawn from a separate stream. Use your own variant; the checkers evaluate_A, evaluate_B work as before."""
+    if story == 'A':
+        N = int(size)
+        rng = np.random.default_rng(101)
+        V = int(round(N / 3.5))
+        P = rng.uniform(0, 100, size=(N, 2))
+        q = rng.integers(15, 30, size=N)
+        W = rng.uniform(40, 60, size=2)
+        d = dict(V=V, N=N, warehouse=W, points=P, demand=q)
+        r2 = np.random.default_rng(1101 + variant)
+        if variant in (1, 2):
+            d['Cap'] = int(np.ceil(q.sum() / (0.75 * V)))
+        if variant == 2:
+            d['is_premium'] = r2.choice([0, 1], size=N, p=[0.75, 0.25])
+            d['penalty'] = r2.uniform(200, 500, size=N) * d['is_premium']
+        if variant == 3:
+            base = r2.integers(60, 150, size=V).astype(float)
+            d['vehicle_cap'] = np.ceil(base * (q.sum() / 0.75) / base.sum()).astype(int)
+            d['vehicle_cost_per_km'] = r2.uniform(0.8, 1.6, size=V)
+        d['dist'] = np.linalg.norm(P[:, None, :] - P[None, :, :], axis=2)
+        d['D'] = np.linalg.norm(P - W, axis=1)
+    else:
+        M = int(size)
+        rng = np.random.default_rng(202)
+        S = int(round(M / 3.5))
+        d = dict(S=S, M=M, cpu_cap=rng.integers(32, 65, size=S), mem_cap=rng.integers(64, 257, size=S),
+                 cpu_req=rng.integers(1, 9, size=M), mem_req=rng.integers(2, 33, size=M))
+        r2 = np.random.default_rng(2202 + variant)
+        if variant == 2:
+            d['zone'] = r2.integers(0, 3, size=S)
+            d['is_premium_vm'] = r2.choice([0, 1], size=M, p=[0.75, 0.25])
+            vz = r2.choice(np.unique(d['zone']), size=M)
+            d['vm_required_zone'] = np.where(d['is_premium_vm'] == 1, vz, -1)
+        if variant == 3:
+            d['is_gpu_server'] = r2.choice([0, 1], size=S, p=[0.6, 0.4])
+            d['needs_gpu'] = r2.choice([0, 1], size=M, p=[0.8, 0.2])
     d['story'], d['variant'] = story, variant
     return d
 
