@@ -458,7 +458,9 @@ the last run of each size, F2 shows all of them. Times change from run to run; v
 
 | Tool or source | Used for | Files or sections | What I checked myself |
 |---|---|---|---|
-|  |  |  |  |
+| final_kit.zip (course) | generator with scaled instances, environment check, scaling and exact solver helpers | checkpoint4_generator_PUBLIC.py, check_env.py, experiments/run_scaling.py, experiments/exact_helper.py | ran check_env.py --scaled 100 and compared the printed values with the kit README (N 100, V 29, demand 2218, Cap 102) |
+| numpy, scipy, matplotlib | arrays, LP and MILP solving with HiGHS, figures | final/src/common.py, src/meta/ga.py | versions pinned in requirements.txt; all tests passed after the change in ga.py |
+| AI assistant | code draft and debugging, report redaction | final/src/common.py, src/meta/ga.py (start argument), README.md (section Final), T03_Final.pdf (Block 4 memo) | read and understood the code; ran all GA tests after the change (all passed); checked that the GA accepts the rounded LP start of run_scaling.py; checked that every number in the memo agrees with Tables 2 and 3 of the report |
 
 ### Abdrashit Yersultan (Block 1)
 
