@@ -470,9 +470,10 @@ the last run of each size, F2 shows all of them. Times change from run to run; v
 
 ### Amanbay Amir (Block 3)
 
-| Tool or source | Used for | Files or sections | What I checked myself |
-|---|---|---|---|
-|  |  |  |  |
+| Tool or source                                                                                                 | Used for | Files or sections | What I checked myself                                                                                                                                                                                                                                                                                                                                                                                                                     |
+|----------------------------------------------------------------------------------------------------------------|---|---|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| numpy, scipy , matplotlib | arrays and statistics, exact solver, Figure F2, reading and writing files | `exact_scaled.py`, `lp_round.py`, `block3.py`, `common.py` | all exact and rounded plans are feasible under `evaluate_A`; Table 3 agrees with the run files |
+| AI assistant                                                                                                   | drafting the LP rounding, the scaling scripts, the Table 3 script and the Block 3 text; drafted by AI, then read, checked and committed by the author | `final/src/exact_scaled.py`, `final/src/lp_round.py`, `final/run_block3_*.sh`, `final/src/block3.py`, `results/final_exact*`, `results/final_lp_rounding.csv`, `results/final_rounded_A_*.json`, `results/final_scaling_*.csv`, `results/final_table3*.csv`, `figures/final_F2_exact_time.png`, Block 3 | read and understood the code; fed every saved plan (exact for N = 35, 60, 100, 150 and the three LP-rounded starts) back into `evaluate_A`: all are feasible and the costs match the CSV files. The solver gap is computed from the bound. I recomputed mean, best and the number of feasible runs of Table 3 from `final_scaling_runs.csv` and they agree. Both exact runs are kept in `final_exact.csv`, and Table 3 uses the last one. |
 
 ### Kaniyeva Zhamilya (Block 2)
 
