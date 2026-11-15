@@ -476,5 +476,5 @@ the last run of each size, F2 shows all of them. Times change from run to run; v
 
 | Tool or source | Used for | Files or sections | What I checked myself |
 |---|---|---|---|
-|  |  |  |  |
-
+| Python, NumPy, Matplotlib | Block 2 implementation, numerical results, convergence data and figure generation | `final/src/block2.py`, `results/final_table2.csv`, `results/final_F1_points.json`, `figures/final_F1_methods.png` | checked the reported statistics (block2.py) for GA, SA, both random-search baselines and the exact solver. Reviewed feasibility, mean costs, standard deviations, gaps and convergence values. |
+| AI assistant | coding review and debugging guidance | block2.py | reviewed the suggested code. |
